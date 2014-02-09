@@ -1,5 +1,5 @@
-function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0] = plasma_parameters(n0)
-% function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0] = plasma_parameters(n0)
+function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0, beta_p, Rb,load] = plasma_parameters(n0,Et,N)
+% function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0, beta_p] = plasma_parameters(n0)
 % input:
 %   n0 is plasma density in cm^-3
 %
@@ -9,15 +9,9 @@ function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0] = plasm
 %   skin_depth is c/omega_p in microns
 %   plasma time is 1/omega_p in fs
 %   E0 is the plasma decelerating field in GV/m
+%   beta_p is the betatron wavelength/(2pi) in cm
 
-SI_c    = 299792458;       % speed of light  [m/s] 
-SI_e    = 1.60217733e-19;  % electron charge [C]
-SI_em   = 9.1093897e-31;   % electron mass [kg]
-SI_eM   = 0.510998928;     % electron mass [MeV/c^2]
-SI_pM   = 938.271996;      % electron mass [MeV/c^2]
-SI_re   = 2.81794092e-15;  % classical radius of electron [m]
-SI_eps0 = 8.854187817e-12; % permittivity of free space [F/m]
-SI_mu0  = 4e-7*pi;         % permeability of free space [T*m/A]
+SI_consts;
 
 n = n0*100^3;
 
@@ -27,3 +21,28 @@ skin_depth = SI_c*1e6/omega_p;
 plasma_time = 1e15/omega_p;
 plasma_period = 2*pi*plasma_time;
 E0 = SI_em*SI_c*omega_p/SI_e/1e9;
+gamma = 20.35e3/SI_eM;
+beta_p = sqrt(2*gamma)*skin_depth/1e4;
+
+
+if nargin > 1
+% Transfomer ratio/beam loading stuff
+
+e_n = 1e-6;          % normalized emittance
+gamma = 20.35/.511e-3; % gamma
+k_p = 1/(skin_depth*1e-6);    % plasma wave vector
+
+sigma_mat = sqrt(e_n/k_p * sqrt(2/gamma)); % matched sigma r
+sigma_z_DB = 1/k_p;                        % match sigma z
+%sigma_z_DB = 40e-6
+
+nb = N / (2*pi)^(3/2) / sigma_z_DB / sigma_mat^2; % bunch density
+nb_n0 = nb/n0/1e6;                                % normalizaed bunch density
+
+lambda = nb_n0 * (k_p*sigma_mat)^2;               % normalize line charge
+Rb = 2/k_p * sqrt(lambda);                        % bubble radius
+
+Q_WB = 0.456*(k_p*Rb)^4/(Et*E0);
+load = Q_WB*1e-9/SI_e;
+
+end
