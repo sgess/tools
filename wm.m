@@ -11,3 +11,13 @@ if n == 1
     moment = sum(x.*y)/sum(y);
     
 end
+
+if n == 2
+    
+    cent = sum(x.*y)/sum(y);
+    moment = sqrt(sum(y.*(x-cent).^2)/sum(y));
+    
+end
+
+    
+    
