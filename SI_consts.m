@@ -11,7 +11,9 @@
  SI_sband  = 2856e6;          % SLAC s-band freq [Hz]
  SI_sdegs  = 1/(360*SI_sband);  % SLAC s-band deg [s]
  SI_sdegm  = SI_c*SI_sdegs;     % SLAC s-band deg [m]
+ SI_sband_k = 2*pi*SI_sband/SI_c; % SLAC cavity s-band wavenumber [1/m]
  
  SI_xband  = 4*SI_sband;        % SLAC x-band freq [Hz]
  SI_xdegs  = SI_sdegs/4;        % SLAC x-band deg [s]
  SI_xdegm  = SI_sdegm/4;        % SLAC x-band deg [s]
+ SI_xband_k = 2*pi*SI_xband/SI_c; % SLAC cavity s-band wavenumber [1/m]
