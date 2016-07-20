@@ -316,7 +316,7 @@ switch nargin
         xx=X;yy=Y;
         start=calcstart(xx,NumPeaks,xoffset);
         AUTOZERO=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 2
         NumPeaks=1;
@@ -326,7 +326,7 @@ switch nargin
         xx=signal;yy=center;
         start=calcstart(xx,NumPeaks,xoffset);
         AUTOZERO=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 3
         NumPeaks=1;
@@ -336,7 +336,7 @@ switch nargin
         start=calcstart(xx,NumPeaks,xoffset);
         AUTOZERO=0;
         FIXEDWIDTH=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 4
         peakshape=1;
@@ -345,7 +345,7 @@ switch nargin
         start=calcstart(xx,NumPeaks,xoffset);
         AUTOZERO=0;
         FIXEDWIDTH=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 5
         extra=zeros(1,NumPeaks);
@@ -353,35 +353,35 @@ switch nargin
         start=calcstart(xx,NumPeaks,xoffset);
         AUTOZERO=0;
         FIXEDWIDTH=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 6
         NumTrials=1;
         start=calcstart(xx,NumPeaks,xoffset);
         AUTOZERO=0;
         FIXEDWIDTH=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 7
         start=calcstart(xx,NumPeaks,xoffset);
         AUTOZERO=0;
         FIXEDWIDTH=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 8
         AUTOZERO=0;
         FIXEDWIDTH=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 9
         AUTOZERO=autozero;
         FIXEDWIDTH=0;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 10
         AUTOZERO=autozero;
         FIXEDWIDTH=fixedparameters;
-        plots=1;
+        plots=0;
         BIPOLAR=0;
     case 11
         AUTOZERO=autozero;

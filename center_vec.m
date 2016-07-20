@@ -1,5 +1,5 @@
 function out_vec = center_vec(in_vec,axis_vec,center_ind,center_val,warn)
-% function out_vec = center_vec(in_vec,axis_vec,center_index)
+% function out_vec = center_vec(in_vec,axis_vec,center_index,center_val)
 % 
 % This functions "centers a vector". It shifts a vector "in_vec"
 % such that the "center_index" position lines up with the "center_val" 
