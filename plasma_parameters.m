@@ -1,4 +1,4 @@
-function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0, beta_p, Rb,load] = plasma_parameters(n0,Et,N)
+function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0, beta_p, k_p, Rb,load] = plasma_parameters(n0,gamma,Et,N)
 % function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0, beta_p] = plasma_parameters(n0)
 % input:
 %   n0 is plasma density in cm^-3
@@ -18,14 +18,18 @@ n = n0*100^3;
 omega_p = sqrt(n*SI_e^2/(SI_eps0 * SI_em));
 lambda_p = 2*pi*SI_c*1e6/omega_p;
 skin_depth = SI_c*1e6/omega_p;
+k_p = omega_p/SI_c;
 plasma_time = 1e15/omega_p;
 plasma_period = 2*pi*plasma_time;
 E0 = SI_em*SI_c*omega_p/SI_e/1e9;
-gamma = 20.35e3/SI_eM;
-beta_p = sqrt(2*gamma)*skin_depth/1e4;
 
+if nargin < 2
+    gamma = 20.35e3/SI_eM;
+end
 
-if nargin > 1
+beta_p = sqrt(2*gamma)*skin_depth;
+
+if nargin > 2
 % Transfomer ratio/beam loading stuff
 
 e_n = 1e-6;          % normalized emittance
