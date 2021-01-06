@@ -9,7 +9,7 @@ function [omega_p, lambda_p, skin_depth, plasma_time, plasma_period, E0, beta_p,
 %   skin_depth is c/omega_p in microns
 %   plasma time is 1/omega_p in fs
 %   E0 is the plasma decelerating field in GV/m
-%   beta_p is the betatron wavelength/(2pi) in cm
+%   beta_p is the betatron wavelength/(2pi) in m
 
 SI_consts;
 
@@ -31,7 +31,7 @@ if nargin < 3
     mb = SI_em;
 end
 
-beta_p = sqrt(2*gamma)*sqrt(mb/SI_em)*skin_depth;
+beta_p = sqrt(2*gamma)*sqrt(mb/SI_em)*skin_depth/1e6;
 
 if nargin > 3
 % Transfomer ratio/beam loading stuff
